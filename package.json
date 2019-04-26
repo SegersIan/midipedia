@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "test": "./node_modules/.bin/tape -r 'esm' ./tests/**/*.test.js"
   },
   "dependencies": {
     "core-js": "^2.6.5",
@@ -15,6 +16,8 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.6.0",
     "@vue/cli-service": "^3.6.0",
+    "esm": "^3.0.82",
+    "tape": "^4.10.1",
     "vue-template-compiler": "^2.5.21"
   }
 }

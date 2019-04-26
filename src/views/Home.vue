@@ -7,6 +7,13 @@
             a single byte.
         </p>
 
+        <p>
+            A MIDI message is 1 to 3 bytes long. The first byte (the status byte) determines how many data
+            bytes (all bytes following a status byte) should follow. If you specified more data bytes
+            than the MIDI spec states for given status byte, those data byte(s) will be greyed out in the debugger. For more details
+            read the FAQ.
+        </p>
+
         <div class="debugger" :class="{ 'debugger-invalid' : showErrorBox, 'debugger-valid' : showExplanationBox}">
 
             <h3 class="text-center">Debug your MIDI Message</h3>
@@ -19,14 +26,14 @@
             </div>
             <div class="box box-explanation" v-else-if="showExplanationBox">
 
-                <div class="text-center">Your MIDI Message is {{midiDescription.byteDescriptions.length}} Byte(s) long.
+                <div class="text-center">Your MIDI message is {{midiDescription.byteDescriptions.length}} Byte(s) long, expected is {{midiDescription.expectedBytes}} Byte(s) with given Status byte.
                 </div>
                 <div class="border-midi-messages"></div>
 
                 <h3 class="text-center"> {{midiDescription.description}} </h3>
 
                 <div class="bytes">
-                    <div class="byte " v-for="byte of midiDescription.byteDescriptions">
+                    <div class="byte" :class="{'byte-invalid':!byte.isExpected}" v-for="byte of midiDescription.byteDescriptions">
                         <div class="text-center" style="margin-top: 20px">{{byte.type}} Byte</div>
                         <div class="border-bytes"></div>
                         <midi-byte :byte="byte.valueAsBin"></midi-byte>
@@ -140,7 +147,6 @@
 
     }
 
-
     .debugger {
         margin-top: 30px;
         border-width: 10px;
@@ -168,7 +174,7 @@
     .box {
         padding: 10px;
         margin: 10px auto 20px auto;
-        width: 90%;
+        width: 95%;
         border-radius: 5px;
     }
 
@@ -187,6 +193,7 @@
 
     .byte {
         flex: 1;
+        padding: 0px 5px 0 5px;
     }
 
     .byte + .byte {
@@ -200,6 +207,10 @@
     .faq {
         margin-top: 30px;
         color: #777777;
+    }
+
+    .byte-invalid{
+        background-color: lightgray;
     }
 
 
