@@ -32,7 +32,6 @@
 </template>
 
 <script>
-    import midiApi from '../lib/midi-api';
     import MidiMessage from "./MidiMessage";
 
     export default {
@@ -45,23 +44,10 @@
             }
         },
         created() {
-            this.init();
+
         },
         methods: {
-            async init() {
-                this.inputs = await midiApi.getInputs();
 
-                for (const [, input] of this.inputs) {
-                    input.onmidimessage = (e) => {
-                        this.midiMessage = e.data;
-                    };
-                    input.onstatechange = function (e) {
-                        //console.log(`${input.name} received state change`);
-                        //console.log(e);
-                    };
-
-                }
-            }
         },
         computed: {
             midiMessageExplained() {

@@ -1,21 +1,97 @@
 <template>
     <div id="app">
-        <router-view/>
+        <header>
+            <h1>MyMIDI.studio {{$router.currentRoute.path | formatPath}}</h1>
+        </header>
+
+        <main>
+
+            <div class="nav">
+                <router-link tag="div" class="nav__item" to="/">Home</router-link>
+                <router-link tag="div" class="nav__item" to="/debugger">Debugger</router-link>
+                <router-link tag="div" class="nav__item" to="/about">About</router-link>
+            </div>
+            <div class="content">
+                <router-view/>
+            </div>
+
+        </main>
+
         <footer class="text-center">
             Created with ❤ by <a href="http://www.segersian.com" target="_blank">Segers Ian</a>
         </footer>
+
     </div>
 </template>
 
+<script>
+    export default {
+        name: 'app',
+        filters: {
+            formatPath(value) {
+                if (value && value.length > 1) {
+                    return `:: ${value.substr(1)}`;
+                }
+                return '';
+            }
+        }
+    }
+</script>
+
 <style>
+
+    html, body, header, main, footer, div, h1, h2, h3, h4, h5, h6 {
+        margin: 0;
+        padding: 0;
+    }
+
     #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        font-family: American Typewriter, serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         color: #2c3e50;
     }
 
-    .text-center{
+
+    header {
+        padding: 5px 0 5px 10px;
+        border: 1px solid black;
+        margin: 0 0 10px 0;
+    }
+
+    main {
+        display: flex;
+    }
+
+    .nav {
+        flex: 1;
+        margin: 0px 10px 0 0;
+    }
+
+    .nav__item {
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    .nav__item:hover {
+        background-color: lightblue;
+    }
+
+    .content {
+        flex: 6;
+    }
+
+    footer {
+        margin-top: 50px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        padding: 10px 0 10px 0;
+    }
+
+    .text-center {
         text-align: center;
     }
 
@@ -24,8 +100,5 @@
 
     }
 
-    footer{
-        margin-top: 50px;
-    }
 
 </style>
