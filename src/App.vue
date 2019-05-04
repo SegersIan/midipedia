@@ -1,7 +1,8 @@
 <template>
-    <div id="app">
+    <div id="app" class="app" :class="{ 'darkmode' : darkModeOn }">
         <header>
             <h1>MyMIDI.studio {{$router.currentRoute.path | formatPath}}</h1>
+            <span style="cursor: pointer" @click="toggleDarkMode">Toggle Darkmode</span>
         </header>
 
         <main>
@@ -27,6 +28,27 @@
 <script>
     export default {
         name: 'app',
+        data() {
+            return {
+                darkModeOn: false
+            }
+        },
+        created(){
+            this.init();
+        },
+        methods: {
+            init() {
+                const value = localStorage.getItem('darkmode');
+                if (value && value.toLowerCase() === 'true') {
+                    this.darkModeOn = true;
+                }
+            },
+            toggleDarkMode(){
+                this.darkModeOn = !this.darkModeOn;
+                localStorage.setItem('darkmode', this.darkModeOn.toString());
+            }
+
+        },
         filters: {
             formatPath(value) {
                 if (value && value.length > 1) {
@@ -45,17 +67,21 @@
         padding: 0;
     }
 
-    #app {
+    .app {
         font-family: American Typewriter, serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         color: #2c3e50;
+        min-height: 100vh;
     }
 
+    .darkmode {
+        background-color: #000000;
+        color: gray;
+    }
 
     header {
         padding: 5px 0 5px 10px;
-        border: 1px solid black;
         margin: 0 0 10px 0;
     }
 
@@ -75,6 +101,12 @@
 
     .nav__item:hover {
         background-color: lightblue;
+    }
+
+
+    .darkmode .nav__item:hover {
+        background-color: darkgray;
+        color: black;
     }
 
     .content {

@@ -1,13 +1,6 @@
 <template>
     <div>
-        <div>
-            <input class="midi" id="midiMessage" type="text" v-model="midiMessageExplained">
-        </div>
-
-        <div>
-            <MidiMessage :value="midiMessage"></MidiMessage>
-        </div>
-
+        <button @click="init">CONNECT</button>
         <table>
             <thead>
             <tr>
@@ -19,7 +12,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="([, obj]) of inputs">
+
+            <tr v-for="obj of inputs">
                 <td>{{obj.id}}</td>
                 <td>{{obj.type}}</td>
                 <td>{{obj.name}}</td>
@@ -32,37 +26,30 @@
 </template>
 
 <script>
-    import MidiMessage from "./MidiMessage";
+
+    import {mapState} from 'vuex';
 
     export default {
         name: "MidiInputs",
-        components: { MidiMessage },
-        data() {
-            return {
-                inputs: [],
-                midiMessage: [177, 24, 127],
-            }
-        },
-        created() {
-
+        async created() {
+            this.init();
         },
         methods: {
-
+            async init() {
+                this.$store.dispatch('loadMidiDevices');
+            }
         },
         computed: {
-            midiMessageExplained() {
-                if(!this.midiMessage){
-                    return 'No recent MIDI Message Received'
-                }
-                return this.midiMessage;
-            }
+            ...mapState({
+                inputs: state => state.midi.inputs
+            })
         }
     }
 </script>
 
 <style scoped>
 
-    .midi{
+    .midi {
         height: 2rem;
         padding: 5px;
         width: 500px;

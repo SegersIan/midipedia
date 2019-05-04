@@ -28,7 +28,7 @@
 
             <h3 class="text-center">Debug your MIDI Message</h3>
             <input type="text" v-model="midiMessage" @input="validateMessage" placeholder="Type a MIDI message...">
-            <div class="box box-error" style="color: black; text-align: left" v-if="showErrorBox">
+            <div class="box box-error" style="text-align: left" v-if="showErrorBox">
                 <strong>Invalid MIDI Message</strong>
                 <ul>
                     <li v-for="error of validation.errors">{{error}}</li>
@@ -55,6 +55,9 @@
 
         </div>
 
+        <div>
+            <midi-inputs></midi-inputs>
+        </div>
     </div>
 </template>
 
@@ -115,6 +118,7 @@
         border-width: 10px;
         border-style: solid;
         border-color: lightblue;
+        text-align: center;
     }
 
     .debugger-invalid {
@@ -131,22 +135,14 @@
         width: 90%;
         font-size: 1.8rem;
         text-align: center;
-        margin-bottom: 20px;
+        margin: 10px auto 20px auto;
     }
 
     .box {
         padding: 10px;
         margin: 10px auto 20px auto;
-        width: 95%;
+        width: 100%;
         border-radius: 5px;
-    }
-
-    .box-error {
-        color: #ffffff;
-    }
-
-    .box-explanation {
-        color: #000000;
     }
 
     .bytes {
@@ -163,14 +159,6 @@
         margin-left: 20px;
     }
 
-    .bold {
-        font-weight: bold;
-    }
-
-    .faq {
-        margin-top: 30px;
-        color: #777777;
-    }
 
     .byte-invalid{
         background-color: lightgray;
