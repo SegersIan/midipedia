@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <h2>Debugger</h2>
+        <h2>Midi Debugger</h2>
         <p>
             Learn, understand and debug your MIDI messages with this interactive tool. You can manually type a
             MIDI message as one long binary number, a list of decimals (each item denoting a single byte) or just

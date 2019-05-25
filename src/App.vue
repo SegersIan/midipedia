@@ -1,17 +1,22 @@
 <template>
     <div id="app" class="app" :class="{ 'darkmode' : darkModeOn }">
         <header>
-            <h1>MyMIDI.studio {{$router.currentRoute.path | formatPath}}</h1>
+
+            <h1>WebApiStudio.com {{$router.currentRoute.name | formatPath}}</h1>
             <span style="cursor: pointer" @click="toggleDarkMode">Toggle Darkmode</span>
+
         </header>
 
         <main>
 
             <div class="nav">
                 <router-link tag="div" class="nav__item" to="/">Home</router-link>
-                <router-link tag="div" class="nav__item" to="/debugger">Debugger</router-link>
+                <router-link tag="div" class="nav__item" to="/midi-debugger">MIDI Debugger</router-link>
+                <router-link tag="div" class="nav__item" to="/gamepad-debugger">Gamepad Debugger</router-link>
+                <router-link tag="div" class="nav__item" to="/gamepad-studio">PS4 Studio</router-link>
                 <router-link tag="div" class="nav__item" to="/about">About</router-link>
             </div>
+
             <div class="content">
                 <router-view/>
             </div>
@@ -33,7 +38,7 @@
                 darkModeOn: false
             }
         },
-        created(){
+        created() {
             this.init();
         },
         methods: {
@@ -43,7 +48,7 @@
                     this.darkModeOn = true;
                 }
             },
-            toggleDarkMode(){
+            toggleDarkMode() {
                 this.darkModeOn = !this.darkModeOn;
                 localStorage.setItem('darkmode', this.darkModeOn.toString());
             }
@@ -51,10 +56,7 @@
         },
         filters: {
             formatPath(value) {
-                if (value && value.length > 1) {
-                    return `:: ${value.substr(1)}`;
-                }
-                return '';
+                return `:: ${value}`;
             }
         }
     }

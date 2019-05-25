@@ -1,7 +1,7 @@
 <template>
     <div class="home">
-        <h2>Welcome to MyMIDI.studio</h2>
-        <p>A small playground to experiment with MIDI!</p>
+        <h2>Welcome to WebApiStudio.com</h2>
+        <p>A small playground to experiment with different Web Apis!</p>
 
 
         <h3>What is MIDI?</h3>
