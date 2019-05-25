@@ -18,5 +18,11 @@ export default {
         15: 'Right',
         16: 'PS button',
         17: 'Touchpad'
+    },
+    axes: {
+        0: 'Left Joystick x-axe (1 right, -1 left)',
+        1: 'Left Joystick y-axe (1 bottom, -1 top)',
+        2: 'Right Joystick x-axe (1 right, -1 left)',
+        3: 'Right Joystick y-axe (1 bottom, -1 top)',
     }
 }
