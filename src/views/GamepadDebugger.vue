@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p style="margin-top: -40px">
+        <p>
             For now I only support the PS4 gamepad. More might be added at a later stage.
         </p>
 
