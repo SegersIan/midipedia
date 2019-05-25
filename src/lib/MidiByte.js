@@ -4,9 +4,6 @@ const BYTE_TYPE = {
     UNKNOWN: 'Unknown Byte Type'
 };
 
-
-
-
 const MESSAGE_TYPES = {
     NOTE_OFF: {
         statusByte: x => x,
@@ -16,8 +13,6 @@ const MESSAGE_TYPES = {
         ]
     }
 };
-
-
 
 function MidiByte(value) {
     if (typeof value === 'number') {
