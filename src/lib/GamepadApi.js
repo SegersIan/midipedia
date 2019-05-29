@@ -1,5 +1,3 @@
-const doNothing = () => ({});
-
 const EVENT_TYPE = {
     CONNECTED: 'gamepadconnected',
     DISCONNECTED: 'gamepaddisconnected',
