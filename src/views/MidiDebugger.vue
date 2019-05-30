@@ -157,10 +157,7 @@
     .byte {
         flex: 1;
         padding: 0px 5px 0 5px;
-    }
-
-    .byte + .byte {
-        margin-left: 20px;
+        margin: 0 20px 0 20px;
     }
 
 

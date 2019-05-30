@@ -165,10 +165,18 @@ function generateControlModeChangeMessage({number}) {
         byteCode: toByteCode(number),
         label: `Control/Mode Change ${number - 175}`,
         dataBytes: [
-            {label: 'Control Number'},
-            {label: 'Data'},
+            {label: mapByte1},
+            {label: 'Value'},
         ]
-    })
+    });
+
+    function mapByte1(value) {
+        if (value === 0) {
+            return 'Bank Select'
+        } else {
+            return 'TODO';
+        }
+    }
 }
 
 function get(byteCode) {

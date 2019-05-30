@@ -41,7 +41,11 @@ function describeMidiMessage(midiMessage) {
             isExpected: false
         };
         if (definition.dataBytes[0]) {
-            byteDescription.description = definition.dataBytes[0].label + ' ' + toNumberCode(dataByte1);
+            if( typeof definition.dataBytes[0].label === 'function'){
+                byteDescription.description = definition.dataBytes[0].label(toNumberCode(dataByte1));
+            }else{
+                byteDescription.description = definition.dataBytes[0].label + ' ' + toNumberCode(dataByte1);
+            }
             byteDescription.isExpected = true;
         } else {
             byteDescription.description = DESCRIPTION.notExpected;
