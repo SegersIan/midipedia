@@ -1,5 +1,5 @@
 import MidiMessageDefinition from './MidiMessageDefinition';
-import { toByteCode, toNumberCode } from './util';
+import {toByteCode, toNumberCode} from './util';
 
 const createFormatterFn = (label, correction) => (index) => `${label} (channel ${index - correction})`;
 
@@ -9,8 +9,8 @@ const definitions = [
         endNumber: 143,
         labelFormatterFn: createFormatterFn(`Note off`, 127),
         dataBytes: [
-            { label: 'Note Number' },
-            { label: 'Note Velocity' },
+            {label: 'Note Number'},
+            {label: 'Note Velocity'},
         ]
     }),
     ...generate({
@@ -18,8 +18,8 @@ const definitions = [
         endNumber: 159,
         labelFormatterFn: createFormatterFn(`Note on`, 143),
         dataBytes: [
-            { label: 'Note Number' },
-            { label: 'Note Velocity' },
+            {label: 'Note Number'},
+            {label: 'Note Velocity'},
         ]
     }),
     ...generate({
@@ -27,22 +27,26 @@ const definitions = [
         endNumber: 175,
         labelFormatterFn: createFormatterFn(`Polyphonic Aftertouch `, 159),
         dataBytes: [
-            { label: 'Note Number' },
-            { label: 'Pressure' },
+            {label: 'Note Number'},
+            {label: 'Pressure'},
         ]
     }),
+    generateControlModeChangeMessage({number: 176}),
     ...generate({
-        startNumber: 176,
+        startNumber: 177,
         endNumber: 191,
         labelFormatterFn: createFormatterFn(`Control/Mode Change`, 175),
-        dataBytes: []
+        dataBytes: [
+            {label: 'Control Number'},
+            {label: 'Data'},
+        ]
     }),
     ...generate({
         startNumber: 192,
         endNumber: 207,
         labelFormatterFn: createFormatterFn(`Program Change `, 191),
         dataBytes: [
-            { label: 'Program #' }
+            {label: 'Program #'}
         ]
     }),
     ...generate({
@@ -50,7 +54,7 @@ const definitions = [
         endNumber: 223,
         labelFormatterFn: createFormatterFn(`Channel Aftertouch`, 207),
         dataBytes: [
-            { label: 'Pressure' }
+            {label: 'Pressure'}
         ]
     }),
     ...generate({
@@ -58,8 +62,8 @@ const definitions = [
         endNumber: 239,
         labelFormatterFn: createFormatterFn(`Pitch Bend Change `, 223),
         dataBytes: [
-            { label: 'Pitch Bender LSB' },
-            { label: 'Pitch Bender MSB' }
+            {label: 'Pitch Bender LSB'},
+            {label: 'Pitch Bender MSB'}
         ]
     }),
     new MidiMessageDefinition({
@@ -75,12 +79,12 @@ const definitions = [
     new MidiMessageDefinition({
         byteCode: toByteCode(242),
         label: `Song Position Pointer`,
-        dataBytes: [{ label: 'LSB' }, { label: 'MSB' }]
+        dataBytes: [{label: 'LSB'}, {label: 'MSB'}]
     }),
     new MidiMessageDefinition({
         byteCode: toByteCode(243),
         label: `Song Select`,
-        dataBytes: [{ label: 'song #' }]
+        dataBytes: [{label: 'song #'}]
     }),
     new MidiMessageDefinition({
         byteCode: toByteCode(244),
@@ -144,7 +148,7 @@ const definitions = [
     })
 ];
 
-function generate({ startNumber, endNumber, dataBytes = [], labelFormatterFn }) {
+function generate({startNumber, endNumber, dataBytes = [], labelFormatterFn}) {
     const output = [];
     for (let index = startNumber; index <= endNumber; index++) {
         output.push(new MidiMessageDefinition({
@@ -154,6 +158,17 @@ function generate({ startNumber, endNumber, dataBytes = [], labelFormatterFn }) 
         }))
     }
     return output;
+}
+
+function generateControlModeChangeMessage({number}) {
+    return new MidiMessageDefinition({
+        byteCode: toByteCode(number),
+        label: `Control/Mode Change ${number - 175}`,
+        dataBytes: [
+            {label: 'Control Number'},
+            {label: 'Data'},
+        ]
+    })
 }
 
 function get(byteCode) {

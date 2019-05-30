@@ -15,10 +15,12 @@
         </p>
 
         <p>
-            <span style="text-decoration: underline">Examples:</span> <br> <br>
+            <strong>Decimal notation Examples</strong> <br>
             192 <br>
             192, 100 <br>
             192, 100, 100 <br>
+            <br>
+            <strong>Binary notation Examples</strong> <br>
             10000000 <br>
             10000000 01111111 (spaces not mandatory)<br>
             10000000 01111111 01111111 (spaces not mandatory)<br>
@@ -55,9 +57,11 @@
 
         </div>
 
+        <!--
         <div>
             <midi-inputs></midi-inputs>
         </div>
+        -->
     </div>
 </template>
 
@@ -73,8 +77,8 @@
             MidiInputs
         },
         created() {
-            this.midiMessage = '192, 100, 100';
-            this.validateMessage({ target: { value: '192, 100, 100' } });
+            this.midiMessage = '176, 0, 0';
+            this.validateMessage({ target: { value: this.midiMessage } });
         },
         data() {
             return {

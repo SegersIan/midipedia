@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import MidiDebugger from './views/MidiDebugger.vue'
 import MidiExplained from './views/MidiExplained';
-import About from './views/About.vue'
 import GamepadMidiController from './views/GamepadMidiController';
 import GamepadDebugger from './views/GamepadDebugger';
 
@@ -30,11 +29,6 @@ export default new Router({
             path: '/gamepad-debugger',
             name: 'Gamepad Debugger',
             component: GamepadDebugger
-        },
-        {
-            path: '/about',
-            name: 'About',
-            component: About
         },
         {
             path: '/gamepad-midi-controller',

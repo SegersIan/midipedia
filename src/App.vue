@@ -14,7 +14,6 @@
             <div class="nav">
                 <div class="nav__item nav__header">General</div>
                 <router-link tag="div" class="nav__item nav__link" to="/">Home</router-link>
-                <router-link tag="div" class="nav__item nav__link" to="/about">About</router-link>
                 <div class="nav__item nav__header">MIDI</div>
                 <router-link tag="div" class="nav__item nav__link" to="/midi-explained">Explained</router-link>
                 <router-link tag="div" class="nav__item nav__link" to="/midi-debugger">Message Debugger</router-link>
