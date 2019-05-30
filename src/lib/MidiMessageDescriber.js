@@ -1,5 +1,6 @@
 import MidiMessageDefinitions from './MidiMessageDefinitions';
 import {toNumberCode} from "./util";
+import Definitions from './MidiMessageDefinitions.json';
 
 const BYTE_TYPES = {
     status: 'STATUS',
@@ -13,19 +14,24 @@ const DESCRIPTION = {
 
 export default describeMidiMessage;
 
+
 function describeMidiMessage(midiMessage) {
     const statusByte = midiMessage.getStatusByte();
+    const definitionA = Definitions.find(x => x.byte.binary === statusByte);
+    let depth = 1;
 
     const definition = MidiMessageDefinitions.get(statusByte);
+
     const output = {
         description: 'description',
-        expectedBytes: definition.dataBytesLength + 1,
+        expectedBytes: 1,
         byteDescriptions: [
             {
                 type: BYTE_TYPES.status,
-                valueAsDec: definition.numberCode,
-                valueAsBin: definition.byteCode,
-                description: definition.label,
+                valueAsDec: definitionA.byte.dec,
+                valueAsBin: definitionA.byte.binary,
+                valueAsHex: '0x' + definitionA.byte.binary,
+                description: definitionA.byte.label,
                 isExpected: true
             }
         ]
@@ -40,12 +46,16 @@ function describeMidiMessage(midiMessage) {
             description: DESCRIPTION.notSet,
             isExpected: false
         };
-        if (definition.dataBytes[0]) {
-            if( typeof definition.dataBytes[0].label === 'function'){
-                byteDescription.description = definition.dataBytes[0].label(toNumberCode(dataByte1));
-            }else{
-                byteDescription.description = definition.dataBytes[0].label + ' ' + toNumberCode(dataByte1);
+
+        if (definitionA.next) {
+
+            if (Array.isArray(definitionA.next)) {
+                const byte1Def = definitionA.next.find(x => x.byte.binary === dataByte1);
+                byteDescription.description = byte1Def.byte.label;
+            } else {
+                byteDescription.description = definitionA.next.byte.label + ' ' + toNumberCode(dataByte1);
             }
+            output.expectedBytes += 1;
             byteDescription.isExpected = true;
         } else {
             byteDescription.description = DESCRIPTION.notExpected;
@@ -65,14 +75,25 @@ function describeMidiMessage(midiMessage) {
             description: DESCRIPTION.notSet,
             isExpected: false
         };
-        if (definition.dataBytes[1]) {
-            byteDescription.description = definition.dataBytes[1].label + ' ' + toNumberCode(dataByte1);
+
+        const byte1Def = definitionA.next.find(x => x.byte.binary === dataByte1);
+        if (byte1Def && byte1Def.next) {
+            if (Array.isArray(byte1Def.next)) {
+                const byte2Def = byte1Def.next.find(x => x.byte.binary === dataByte2);
+                byteDescription.description = byte2Def.byte.label;
+            } else {
+                byteDescription.description = byte1Def.next.byte.label + ' ' + toNumberCode(dataByte2);
+            }
+            output.expectedBytes += 1;
             byteDescription.isExpected = true;
         } else {
             byteDescription.description = DESCRIPTION.notExpected;
             byteDescription.isExpected = false;
         }
         output.byteDescriptions.push(byteDescription);
+
+    } else {
+        return output;
     }
 
     output.description = output.byteDescriptions.map(({description}) => description).join(', ');
