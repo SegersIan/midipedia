@@ -15,13 +15,14 @@
                 <div class="nav__item nav__header">General</div>
                 <router-link tag="div" class="nav__item nav__link" to="/">Home</router-link>
                 <div class="nav__item nav__header">MIDI</div>
-                <router-link tag="div" class="nav__item nav__link" to="/midi-explained">Explained</router-link>
-                <router-link tag="div" class="nav__item nav__link" to="/midi-debugger">Message Debugger</router-link>
+                <router-link tag="div" class="nav__item nav__link" to="/midi/explained">Explained</router-link>
+                <router-link tag="div" class="nav__item nav__link" to="/midi/debugger">Debugger</router-link>
+                <router-link tag="div" class="nav__item nav__link" to="/midi/sender">Sender</router-link>
                 <div class="nav__item nav__header">Gamepad</div>
-                <router-link tag="div" class="nav__item nav__link" to="/gamepad-debugger">Debugger</router-link>
+                <router-link tag="div" class="nav__item nav__link" to="/gamepad/debugger">Debugger</router-link>
                 <div class="nav__item nav__header">Projects</div>
-                <router-link tag="div" class="nav__item nav__link" to="/gamepad-midi-controller">Gamepad + Midi
-                </router-link>
+                <router-link tag="div" class="nav__item nav__link" to="/project/gamepad-midi-controller">Gamepad + Midi          </router-link>
+                <router-link tag="div" class="nav__item nav__link" to="/project/traktorstudio">Traktor Studio</router-link>
             </div>
 
             <div class="content">
@@ -136,6 +137,7 @@
     footer {
         text-align: center;
         padding: 10px 0 10px 0;
+        margin: 100px 0 0 0;
     }
 
     .text-center {
@@ -149,6 +151,16 @@
     hr {
         border: 1px dashed;
         width: 20%;
+    }
+
+    .pane__error{
+        background-color: salmon;
+        padding: 10px;
+    }
+
+    .pane__ok{
+        background-color: lightgreen;
+        padding: 10px;
     }
 
 

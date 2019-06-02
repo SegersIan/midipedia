@@ -57,11 +57,12 @@
 
         </div>
 
-        <!--
+        <h2>MIDI Inputs</h2>
+
         <div>
             <midi-inputs></midi-inputs>
         </div>
-        -->
+
     </div>
 </template>
 
