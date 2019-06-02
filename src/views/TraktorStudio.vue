@@ -24,7 +24,7 @@
 
         <h3>2. Configure Traktor</h3>
 
-        <p>TODO</p>
+        <p>TODO, need to have first full working example for browser and PS4.</p>
 
         <h3>3. Select the MIDI output</h3>
 
