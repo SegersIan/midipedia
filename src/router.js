@@ -24,9 +24,17 @@ export default new Router({
             component: MidiExplained
         },
         {
+            path: '/midi-explained',
+            redirect: '/midi/explained'
+        },
+        {
             path: '/midi/debugger',
             name: 'MIDI Debugger',
             component: MidiDebugger
+        },
+        {
+            path: '/midi-debugger',
+            redirect: '/midi/debugger'
         },
         {
             path: '/gamepad/debugger',
@@ -34,9 +42,17 @@ export default new Router({
             component: GamepadDebugger
         },
         {
+            path: '/gamepad-debugger',
+            redirect: '/gamepad/debugger'
+        },
+        {
             path: '/project/gamepad-midi-controller',
             name: 'Gamepad As MIDI controller',
             component: GamepadMidiController
+        },
+        {
+            path: '/gamepad-midi-controller',
+            redirect: '/project/gamepad-midi-controller'
         },
         {
             path: '/project/traktorstudio',
